@@ -4,16 +4,19 @@ import AllUser from './components/AllUser';
 import Header from './components/Header';
 import HomePage from './components/HomePage';
 import Navbar from './components/Navbar';
-
+import {BrowserRouter, Routes,Route}from 'react-router-dom'
 
 function App() {
   return (
    <>
-  <Header/>
+  <BrowserRouter>
   <Navbar/>
-  <HomePage/>
-  <AllUser/>
-  <AddUser/>
+  <Routes>
+     <Route path='/' element ={<HomePage/>} />
+     <Route path='all' element = {<AllUser/>} />
+     <Route path='add' element={<AddUser/>} />
+  </Routes>
+  </BrowserRouter>
   
    </>
   );

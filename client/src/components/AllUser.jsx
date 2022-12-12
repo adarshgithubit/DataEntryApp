@@ -1,8 +1,9 @@
 import React from 'react'
 import { useEffect } from 'react'
-import { getUser } from '../Service/userApi'
+import { getUser,deleteUser } from '../Service/userApi'
 import {Table, TableHead, TableRow,TableCell, TableBody, Button} from '@mui/material'
 import { useState } from 'react'
+import {Link} from 'react-router-dom'
 
 const AllUser = () => {
  const [users, setUsers]=useState([]);
@@ -19,6 +20,10 @@ const getAllUser = async() =>{
    
 }
 
+const deleteUserDetails =async (id)=>{
+await deleteUser(id);
+getAllUser();
+}
   return (
     <>
   <Table>
@@ -41,10 +46,11 @@ const getAllUser = async() =>{
                   <TableCell>{user.email}</TableCell>
                   <TableCell>{user.phone}</TableCell>
                   <TableCell>
-                    <Button variant ="contained" style={{marginRight:10}}>Edit</Button>
-                    <Button variant ="contained" color='secondary'>Delete</Button>
+                    <Button variant ="contained" style={{marginRight:10}} component={Link} to ={`/edit/${user._id}`}>Edit</Button>
+                    <Button variant ="contained" color='secondary' onClick={()=>deleteUserDetails(user._id)}>Delete</Button>
                   </TableCell>
                 </TableRow>
+
               ))
       }
      </TableBody>
@@ -54,3 +60,4 @@ const getAllUser = async() =>{
 }
 
 export default AllUser
+
